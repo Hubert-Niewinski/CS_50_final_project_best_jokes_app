@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<h2 class="text-center mb-4">Favorite Jokes</h2>
+			{% for joke in favorite_jokes %}
+			<div class="card mb-3">
+				<div class="card-body">
+					<h5 class="card-title">{{ joke.title }}</h5>
+					<p class="card-text">{{ joke.content }}</p>
+					<p class="card-text"><small class="text-muted">Added by: {{ joke.user.username }}</small></p>
+				</div>
+			</div>
+			{% else %}
+			<p>No favorite jokes found.</p>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+{% endblock %}

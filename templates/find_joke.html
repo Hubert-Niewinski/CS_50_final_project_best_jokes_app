@@ -1,0 +1,82 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<h2 class="text-center">Find Joke</h2>
+			<form method="POST">
+				<div class="form-group">
+					<label for="keywords">Keywords</label>
+					<input type="text" class="form-control" id="keywords" name="keywords" />
+				</div>
+				<div class="form-group">
+					<label for="author">Author</label>
+					<input type="text" class="form-control" id="author" name="author" />
+				</div>
+				<div class="form-group">
+					<label for="rating">Rating</label>
+					<input type="number" class="form-control" id="rating" name="rating" min="1" max="10" />
+				</div>
+				<div class="form-group">
+					<label for="category">Category</label>
+					<select name="category" id="category" class="form-control">
+						<option value="" disabled selected hidden>Select Category</option>
+						{% for category in categories %}
+						<option value="{{ category.name }}">{{ category.value }}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="text-center mb-4">
+					<button type="submit" class="btn btn-primary">Search</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	{% if jokes %}
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<h2 class="text-center mb-4">Results</h2>
+			<ul class="list-group">
+				{% for joke in jokes %}
+				<li class="list-group-item">
+					<h5>{{ loop.index }}. {{ joke.content }}</h5>
+					<p class="mb-0">Added by: {{ joke.user.username }}</p>
+					{% set user_rating = None %} {% for rating in user_ratings %} {% if rating.joke_id == joke.id %} {% set
+					user_rating = rating %} {% endif %} {% endfor %} {% if user_rating %}
+					<p class="mt-2">Already rated</p>
+					{% else %}
+					<form method="POST" action="{{ url_for('main.rate_joke', joke_id=joke.id) }}">
+						<div class="form-group mt-2">
+							<label for="rating">Rate this joke:</label>
+							<select name="rating" id="rating" class="form-control" required>
+								<option value="" disabled selected hidden>Select Rating</option>
+								{% for i in range(1, 11) %}
+								<option value="{{ i }}">{{ i }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="text-center">
+							<button type="submit" class="btn btn-primary">Rate</button>
+						</div>
+					</form>
+					<form method="POST" action="{{ url_for('main.add_to_favorites', joke_id=joke.id) }}">
+						<div class="text-center mt-2">
+							<!-- Added mt-2 class for more space -->
+							<button type="submit" class="btn btn-primary">Add to Favorites</button>
+						</div>
+					</form>
+					{% endif %}
+					<hr />
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	{% else %} {% if request.method == 'POST' %}
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<div class="alert alert-danger" role="alert">No jokes found.</div>
+		</div>
+	</div>
+	{% endif %} {% endif %}
+</div>
+{% endblock %}

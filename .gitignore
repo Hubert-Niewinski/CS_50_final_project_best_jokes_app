@@ -1,0 +1,45 @@
+# .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.egg-info/
+*.egg
+*.pyc
+
+# Flask
+instance/
+
+# Databases
+*.db
+*.sqlite
+
+# Environments
+.venv
+env/
+venv/
+ENV/
+
+# IDEs
+.vscode/
+*.swp
+*.swo
+*.swn
+*.idea/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<h2 class="text-center">Add Joke</h2>
+			<form method="POST">
+				<div class="form-group">
+					<label for="joke_content">Joke Content</label>
+					<textarea class="form-control" id="joke_content" name="joke_content" rows="6" required></textarea>
+				</div>
+				<div class="form-group">
+					<label for="keywords">Keywords</label>
+					<input type="text" class="form-control" id="keywords" name="keywords" required />
+				</div>
+				<div class="form-group">
+					<label for="category">Category</label>
+					<select name="category" id="category" class="form-control" required>
+						<option value="" disabled selected hidden>Select Category</option>
+						{% for category in categories %}
+						<option value="{{ category.name }}">{{ category.value }}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="text-center">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
