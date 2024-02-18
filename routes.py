@@ -129,6 +129,7 @@ def find_joke():
             if request.form.get("rating") and request.form.get("rating").strip()
             else None
         )
+        rating_option = request.form.get("rating_option")
         category = (
             request.form.get("category")
             if request.form.get("category") and request.form.get("category").strip()
@@ -147,11 +148,15 @@ def find_joke():
             if author_user:
                 jokes = jokes.filter_by(user_id=author_user.id)
 
-        if rating:
+        if rating and rating_option:
             joke_ids = (
                 db.session.query(Rating.joke_id)
                 .group_by(Rating.joke_id)
-                .having(func.avg(Rating.rating) > rating)
+                .having(
+                    func.avg(Rating.rating) < rating
+                    if rating_option == "lower"
+                    else func.avg(Rating.rating) > rating
+                )
                 .all()
             )
             joke_ids = [joke_id for joke_id, in joke_ids]

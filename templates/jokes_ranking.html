@@ -9,7 +9,7 @@
 				<div class="card-body">
 					<h5 class="card-title">{{ loop.index }}. {{ joke.title }}</h5>
 					<p class="card-text">{{ joke.content }}</p>
-					<p class="card-text"><small class="text-muted">Average rating: {{ average_rating }}</small></p>
+					<p class="card-text"><small class="text-muted">Average rating: {{ average_rating|round(2) }}</small></p>
 					<p class="card-text"><small class="text-muted">Number of rates: {{ rate_count }}</small></p>
 				</div>
 			</div>
