@@ -93,6 +93,7 @@ jokes = [
 
 # Function to seed the database with the test jokes
 def seed_db():
+    print("Seeding the database with test jokes...")
     # Query for a user with the username "admin"
     user = User.query.filter_by(username="admin").first()
 
@@ -116,6 +117,7 @@ def seed_db():
 
     # Commit the changes
     db.session.commit()
+    print("Done!")
 
 
 if __name__ == "__main__":

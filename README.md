@@ -44,10 +44,10 @@ The application has a standard Flask project structure:
 3. Create a virtual environment: `python3 -m venv .venv`
 4. Activate the virtual environment: `source .venv/bin/activate`
 5. Install the requirements: `pip install -r requirements.txt`
-6. Run the models script to create the database: `python models.py`
+6. Set the environment variable for the secret key: `export SECRET_KEY={your_key}`
 7. Set the environment variable for the admin password: `export ADMIN_PASSWORD={your_password}`
-8. (OPTIONAL) Run the database seed script to add base jokes pool: `python seed_db.py`
-9. Set the environment variable for the secret key: `export SECRET_KEY={your_password}`
+8. Run the models script to create the database: `python models.py`
+9. (OPTIONAL) Run the database seed script to add base jokes pool: `python seed_db.py`
 10. Run the application: `flask run`
 
 `export VARIABLE_NAME=value` applies to Linux and Mac Os command line, for Windows use:  
